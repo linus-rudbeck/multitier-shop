@@ -47,6 +47,16 @@ class RestAPI
     }
 
 
+    // Preset response for OK-response (200)
+    protected function ok(){
+        $this->sendJson("OK");
+    }
+
+    // Preset response for no content (204)
+    protected function noContent(){
+        $this->sendJson("", 204);
+    }
+
     // Preset response for if a resource is not found
     protected function notFound(){
         $this->sendJson("Not found", 404);

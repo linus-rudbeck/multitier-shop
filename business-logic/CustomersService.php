@@ -55,4 +55,35 @@ class CustomersService{
 
         return $success;
     }
+
+    // Update the customer in the database by creating a database object 
+    // from data-access layer and calling its update function.
+    public static function updateCustomerById($customer_id, CustomerModel $customer){
+        $customers_database = new CustomersDatabase();
+
+        // If you need to validate data or control what 
+        // gets saved to the database you can do that here.
+        // This makes sure all input from any presentation
+        // layer will be validated and handled the same way.
+
+        $success = $customers_database->updateById($customer_id, $customer);
+
+        return $success;
+    }
+
+    // Delete the customer from the database by creating a database object 
+    // from data-access layer and calling its delete function.
+    public static function deleteCustomerById($customer_id){
+        $customers_database = new CustomersDatabase();
+
+        // If you need to validate data or control what 
+        // gets deleted from the database you can do that here.
+        // This makes sure all input from any presentation
+        // layer will be validated and handled the same way.
+
+        $success = $customers_database->deleteById($customer_id);
+
+        return $success;
+    }
 }
+

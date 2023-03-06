@@ -38,6 +38,20 @@ class CustomersAPI extends RestAPI
         // should get ths contents of the body and create a customer.
         else if ($this->path_count == 2 && $this->method == "POST") {
             $this->postOne();
+        }
+
+        // If theres two parts in the path and the request method is PUT 
+        // it means that the client is requesting "api/Customers/{something}" and we
+        // should get the contents of the body and update the customer.
+        else if ($this->path_count == 3 && $this->method == "PUT") {
+            $this->putOne($this->path_parts[2]);
+        } 
+
+        // If theres two parts in the path and the request method is DELETE 
+        // it means that the client is requesting "api/Customers/{something}" and we
+        // should get the ID from the URL and delete that customer.
+        else if ($this->path_count == 3 && $this->method == "DELETE") {
+            $this->deleteOne($this->path_parts[2]);
         } 
         
         // If none of our ifs are true, we should respond with "not found"
@@ -79,6 +93,44 @@ class CustomersAPI extends RestAPI
 
         if($success){
             $this->created();
+        }
+        else{
+            $this->error();
+        }
+    }
+
+    // Gets the contents of the body and updates the customer
+    // by sending it to the DB
+    private function putOne($id)
+    {
+        $customer = new CustomerModel();
+
+        $customer->customer_name = $this->body["customer_name"];
+        $customer->birth_year = $this->body["birth_year"];
+
+        $success = CustomersService::updateCustomerById($id, $customer);
+
+        if($success){
+            $this->ok();
+        }
+        else{
+            $this->error();
+        }
+    }
+
+    // Deletes the customer with the specified ID in the DB
+    private function deleteOne($id)
+    {
+        $customer = CustomersService::getCustomerById($id);
+
+        if($customer == null){
+            $this->notFound();
+        }
+
+        $success = CustomersService::deleteCustomerById($id);
+
+        if($success){
+            $this->noContent();
         }
         else{
             $this->error();
