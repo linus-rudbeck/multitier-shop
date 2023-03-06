@@ -10,5 +10,5 @@ if (!defined('MY_APP') && basename($_SERVER['PHP_SELF']) == basename(__FILE__)) 
 class CustomerModel{
     public $customer_id;
     public $customer_name;
-    public $birth_year;    
+    public $birth_year;
 }

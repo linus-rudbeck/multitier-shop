@@ -75,7 +75,8 @@ class CustomersAPI extends RestAPI
 
         if ($customer) {
             $this->sendJson($customer);
-        } else {
+        }
+        else {
             $this->notFound();
         }
     }
