@@ -7,7 +7,6 @@ if (!defined('MY_APP') && basename($_SERVER['PHP_SELF']) == basename(__FILE__)) 
 
 require_once __DIR__ . "/../ControllerBase.php";
 
-// Class for handling requests to "api/Customer"
 
 class HomeController extends ControllerBase
 {

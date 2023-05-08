@@ -5,10 +5,12 @@ if (!defined('MY_APP') && basename($_SERVER['PHP_SELF']) == basename(__FILE__)) 
     die('This file cannot be accessed directly.');
 }
 
-// Model class for customers-table in database
+// Model class for users-table in database
 
-class CustomerModel{
-    public $customer_id;
-    public $customer_name;
-    public $birth_year;
+class PurchaseModel{
+    public $purchase_id;
+    public $product_name;
+    public $price;
+    public $purchase_time;
+    public $user_id;
 }

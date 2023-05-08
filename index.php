@@ -5,12 +5,13 @@ define('MY_APP', true);
 
 
 // Load the routers responsible for handling API requests
+require_once __DIR__ . "/config.php";
 require_once __DIR__ . "/api/APIRouter.php";
 require_once __DIR__ . "/frontend/FrontendRouter.php";
 
 // Get URL path
-// http://localhost/multitier-shop/[api/customers/5]
-// http://localhost/multitier-shop/[home/customers] [PATH]
+// http://localhost/multitier-shop/[api/purchases/5]
+// http://localhost/multitier-shop/[home/purchases] [PATH]
 $path = $_GET["path"]; 
 
 $path_parts = explode("/", $path);

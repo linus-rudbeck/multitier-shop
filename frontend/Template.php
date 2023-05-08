@@ -2,10 +2,11 @@
 
 class Template
 {
-    public static function header($title)
+    public static function header($title, $error = false)
     {
         $home_path = getHomePath();
-        ?>
+        $user = getUser();
+?>
         <!DOCTYPE html>
         <html lang="en">
 
@@ -27,20 +28,32 @@ class Template
 
             <nav>
                 <a href="<?= $home_path ?>">Start</a>
-                <a href="<?= $home_path ?>/customers">Customers</a>
                 <a href="<?= $home_path ?>/articles">Articles</a>
+
+                <?php if ($user) : ?>
+                    <a href="<?= $home_path ?>/auth/profile">Profile</a>
+                    <a href="<?= $home_path ?>/purchases">Purchases</a>
+                <?php else : ?>
+                    <a href="<?= $home_path ?>/auth/login">Log in</a>
+                <?php endif; ?>
             </nav>
 
             <main>
 
-        <?php }
+                <?php if ($error) : ?>
+                    <div class="error">
+                        <p><?= $error ?></p>
+                    </div>
+                <?php endif; ?>
+
+            <?php }
 
 
 
-    public static function footer()
-    {
-        ?>
-        </main>
+        public static function footer()
+        {
+            ?>
+            </main>
             <footer>
                 Copyright 2025
             </footer>
@@ -48,4 +61,4 @@ class Template
 
         </html>
 <?php }
-}
+    }

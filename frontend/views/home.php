@@ -8,7 +8,7 @@ Template::header("Home");
 
 <p>
     We are delighted to have you visit our website. Here you will find a selection of products and services that we provide.
-    From our high quality apparel and accessories to our professional services, we are committed to providing our customers
+    From our high quality apparel and accessories to our professional services, we are committed to providing our users
     with only the best. Whether you are looking for a new wardrobe or need help with a project, we have the perfect solution for you.
 </p>
 
