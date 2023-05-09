@@ -58,7 +58,6 @@ class PurchasesAPI extends RestAPI
             $purchases = PurchasesService::getPurchasesByUser($this->user->user_id);
         }
 
-
         $this->sendJson($purchases);
     }
 
@@ -92,12 +91,12 @@ class PurchasesAPI extends RestAPI
         $purchase->purchase_time = $this->body["purchase_time"];
 
         // Admins can connect any user to the purchase
-        if($this->user->user_role === "admin"){
+        if ($this->user->user_role === "admin") {
             $purchase->user_id = $this->body["user_id"];
         }
 
         // Regular users can only add purchases to themself
-        else{
+        else {
             $purchase->user_id = $this->user->user_id;
         }
 
@@ -110,26 +109,17 @@ class PurchasesAPI extends RestAPI
         }
     }
 
-    
+
     private function putOne($id)
     {
-        $this->requireAuth();
+        $this->requireAuth(["admin"]);
 
         $purchase = new PurchaseModel();
 
         $purchase->product_name = $this->body["product_name"];
         $purchase->price = $this->body["price"];
         $purchase->purchase_time = $this->body["purchase_time"];
-
-        // Admins can connect any user to the purchase
-        if($this->user->user_role === "admin"){
-            $purchase->user_id = $this->body["user_id"];
-        }
-
-        // Regular users can only add purchases to themself
-        else{
-            $purchase->user_id = $this->user->user_id;
-        }
+        $purchase->user_id = $this->body["user_id"];
 
         $success = PurchasesService::updatePurchaseById($id, $purchase);
 

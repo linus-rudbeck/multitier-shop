@@ -117,6 +117,8 @@ class RestAPI
         $this->user = UsersService::getUserById($payload->user_id);
     }
 
+    // $this->requireAuth(); <-- Any user will get access
+    // $this->requireAuth(["admin"]); <-- Only admins get access
     protected function requireAuth($authorized_roles = []){
     
         if($this->user === false){

@@ -211,6 +211,7 @@ class PurchaseController extends ControllerBase
         $purchase->product_name = $this->body["product_name"];
         $purchase->price = $this->body["price"];
         $purchase->purchase_time = $existing_purchase->purchase_time;
+        $purchase->user_id = $this->body["user_id"];
 
         $success = PurchasesService::updatePurchaseById($id, $purchase);
 

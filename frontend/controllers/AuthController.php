@@ -156,6 +156,7 @@ class AuthController extends ControllerBase
     private function addProfilePicture()
     {
         $this->requireAuth();
+        
         // Check if a file was uploaded
         if (isset($_FILES['profile_pic']) && $_FILES['profile_pic']['error'] === UPLOAD_ERR_OK) {
 

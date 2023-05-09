@@ -84,13 +84,14 @@ class PurchasesDatabase extends Database
 
         $stmt = $this->conn->prepare($query);
 
-        $stmt->bind_param("siii", $purchase->product_name, $purchase->price, $purchase->purchase_time, $purchase->user_id, $purchase_id);
+        $stmt->bind_param("siiii", $purchase->product_name, $purchase->price, $purchase->purchase_time, $purchase->user_id, $purchase_id);
 
         $success = $stmt->execute();
 
         return $success;
     }
 
+    
     public function deleteById($purchase_id)
     {
         $success = $this->deleteOneRowByIdFromTable($this->table_name, $this->id_name, $purchase_id);

@@ -12,7 +12,6 @@ require_once __DIR__ . "/../data-access/UsersDatabase.php";
 class AuthService
 {
 
-
     public static function registerUser(UserModel $user, $password)
     {
         $users_database = new UsersDatabase();
@@ -74,6 +73,7 @@ class AuthService
         return $success;
     }
 
+
     public static function generateJsonWebToken(UserModel $user)
     {
         // Set the JWT header and payload with the user ID and username
@@ -112,6 +112,7 @@ class AuthService
         return $token;
     }
 
+
     public static function validateToken($token)
     {
         // Split the token into header, payload, and signature strings
@@ -135,7 +136,6 @@ class AuthService
 
         // Verify that the actual signature matches the expected signature
         if ($encoded_signature !== $expected_signature) {
-            var_dump($encoded_signature, $expected_signature);
             return false;
         }
 

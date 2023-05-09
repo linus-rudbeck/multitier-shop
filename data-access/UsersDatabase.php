@@ -87,10 +87,10 @@ class UsersDatabase extends Database
         $users = [];
 
         while ($user = $result->fetch_object("UserModel")) {
-            $users[] = $user;
-
             // Never send the password hash unless needed for authentication
             unset($user->password_hash);
+            
+            $users[] = $user;
         }
 
         return $users;
