@@ -7,6 +7,7 @@ if (!defined('MY_APP') && basename($_SERVER['PHP_SELF']) == basename(__FILE__)) 
 
 require_once __DIR__ . "/../ControllerBase.php";
 require_once __DIR__ . "/../../business-logic/PurchasesService.php";
+require_once __DIR__ . "/../../business-logic/ExchangeRateService.php";
 
 
 class PurchaseController extends ControllerBase
@@ -78,7 +79,29 @@ class PurchaseController extends ControllerBase
         $purchase = $this->getPurchase();
 
         // $this->model is used for sending data to the view
-        $this->model = $purchase;
+        $this->model["purchase"] = $purchase;
+
+        // Convert the price to USD and EUR
+        $this->model["converted_currencies"] = [
+            "usd" => ExchangeRateService::sekToUsd($purchase->price),
+            "eur" => ExchangeRateService::sekToEur($purchase->price)
+        ];
+
+        // Convert the price to the currency specified in the query params
+        if(isset($this->query_params["to_currency"])){
+
+            // Get the currency from the query params
+            $to_currency = $this->query_params["to_currency"];
+
+            // Convert the price to the specified currency
+            $to_currency_price = ExchangeRateService::sekToCurrency($to_currency, $purchase->price);
+
+            // Add the converted price to the model
+            $this->model["converted_currencies"][$to_currency] = $to_currency_price;
+        }
+
+        // Get all available currencies
+        $this->model["available_currencies"] = ExchangeRateService::getCurrencies();
 
         // Shows the view file purchases/single.php
         $this->viewPage("purchases/single");
