@@ -20,7 +20,7 @@ class AuthController extends ControllerBase
         if ($this->method == "POST") {
             $this->handlePost();
         }
-
+        
 
 
         // GET: /home/auth/login

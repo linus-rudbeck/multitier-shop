@@ -29,6 +29,7 @@ class Template
             <nav>
                 <a href="<?= $home_path ?>">Start</a>
                 <a href="<?= $home_path ?>/articles">Articles</a>
+                <a href="<?= $home_path ?>/bible">Bible verses</a>
 
                 <?php if ($user) : ?>
                     <a href="<?= $home_path ?>/auth/profile">Profile</a>
